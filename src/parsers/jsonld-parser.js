@@ -1,5 +1,14 @@
 import { getCheerioObject } from './utils'
 import { AllHtmlEntities } from 'html-entities'
+import _ from 'lodash'
+
+const mapValuesDeep = (obj, fn) =>
+  _.isArray(obj)
+    ? _.map(obj, (val) => mapValuesDeep(val, fn))
+    : _.mapValues(obj, (val, key) =>
+        _.isPlainObject(val)
+          ? mapValuesDeep(val, fn)
+          : fn(val, key, obj))
 
 const entities = new AllHtmlEntities()
 
@@ -20,9 +29,8 @@ export default function (html, config = {}) {
         // Remove trailing semicolon
         .replace(/;$/, '')
 
-      // Not certain if decoding html entities from raw JSON is foolproof but
-      // it seems to work
-      let parsedJSON = JSON.parse(entities.decode(cleanedJson))
+      let parsedJSON = JSON.parse(cleanedJson)
+      parsedJSON = mapValuesDeep(parsedJSON, (val) => entities.decode(val))
       if (!Array.isArray(parsedJSON)) {
         parsedJSON = [parsedJSON]
       }
