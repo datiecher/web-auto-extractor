@@ -2,9 +2,6 @@ import $ from 'cheerio'
 import MetaTagsParser from './parsers/metatag-parser'
 import MicroRdfaParser from './parsers/micro-rdfa-parser'
 import JsonldParser from './parsers/jsonld-parser'
-if (!global._babelPolyfill) {
-  require('babel-polyfill')
-}
 
 export default function () {
   let $html = null
