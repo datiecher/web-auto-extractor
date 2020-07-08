@@ -34,7 +34,8 @@
   "standard": {
     "parser": "babel-eslint",
     "ignore": [
-      "tonicExample.js"
+      "tonicExample.js",
+      "dist/"
     ]
   },
   "keywords": [
