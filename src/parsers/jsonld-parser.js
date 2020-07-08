@@ -1,4 +1,7 @@
 import { getCheerioObject } from './utils'
+import { AllHtmlEntities } from 'html-entities'
+
+const entities = new AllHtmlEntities()
 
 export default function (html, config = {}) {
   const $html = getCheerioObject(html)
@@ -17,7 +20,9 @@ export default function (html, config = {}) {
         // Remove trailing semicolon
         .replace(/;$/, '')
 
-      let parsedJSON = JSON.parse(cleanedJson)
+      // Not certain if decoding html entities from raw JSON is foolproof but
+      // it seems to work
+      let parsedJSON = JSON.parse(entities.decode(cleanedJson))
       if (!Array.isArray(parsedJSON)) {
         parsedJSON = [parsedJSON]
       }
