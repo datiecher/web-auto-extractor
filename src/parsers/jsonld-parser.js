@@ -30,7 +30,10 @@ export default function (html, config = {}) {
         .replace(/;$/, '')
 
       let parsedJSON = JSON.parse(cleanedJson)
-      parsedJSON = mapValuesDeep(parsedJSON, (val) => entities.decode(val))
+      parsedJSON = mapValuesDeep(
+        parsedJSON,
+        (val) => _.isString(val) ? entities.decode(val) : val
+      )
       if (!Array.isArray(parsedJSON)) {
         parsedJSON = [parsedJSON]
       }
