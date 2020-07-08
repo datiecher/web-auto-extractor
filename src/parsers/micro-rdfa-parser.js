@@ -107,9 +107,9 @@ const createHandler = function (specName) {
     if (textForProp) {
       const decodedText = entities.decode(text)
       if (Array.isArray(scopes[scopes.length - 1][textForProp])) {
-        scopes[scopes.length - 1][textForProp][scopes[scopes.length - 1][textForProp].length - 1] += decodedText
+        scopes[scopes.length - 1][textForProp][scopes[scopes.length - 1][textForProp].length - 1] += ' ' + decodedText
       } else {
-        scopes[scopes.length - 1][textForProp] += decodedText
+        scopes[scopes.length - 1][textForProp] += ' ' + decodedText
       }
     }
   }
