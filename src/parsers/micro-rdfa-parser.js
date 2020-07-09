@@ -125,7 +125,7 @@ const createHandler = function (specName) {
           scope[key] = scope[key][0]
         }
       })
-    } else if (tag === PROP) {
+    } else if (tag === PROP && textForProp !== false) {
       const scope = scopes[scopes.length - 1]
       if (Array.isArray(scope[textForProp])) {
         scope[textForProp] = scope[textForProp].map(cleanWhitespace)
