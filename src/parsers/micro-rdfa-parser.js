@@ -9,7 +9,7 @@ function getPropValue (tagName, attribs, TYPE, PROP) {
   } else if ((tagName === 'a' || tagName === 'link') && attribs.href) {
     return attribs.href.trim()
   } else if (attribs.content) {
-    return attribs.content.trim()
+    return entities.decode(attribs.content.trim())
   } else if (attribs[PROP] === 'image' && attribs.src) {
     return attribs.src.trim()
   } else {
