@@ -1,6 +1,6 @@
 {
   "name": "@rane/web-auto-extractor",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Automatically extracts structured information from webpages",
   "main": "dist/index.js",
   "scripts": {
