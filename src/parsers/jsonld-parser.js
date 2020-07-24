@@ -22,8 +22,6 @@ export default function (html, config = {}) {
       const cleanedJson = json
         // Trim whitespace
         .trim()
-        // Handle invalid escpe characters
-        .replace(/([^bfrnt\\/"])\\([^bfrnt\\/"])/ig, '$1\\\\$2')
         // Strip line breaks
         .replace(/[\r\n]/g, ' ')
         // Remove trailing semicolon
