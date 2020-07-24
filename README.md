@@ -1,3 +1,5 @@
+## This is my fork of [`indix/web-auto-extractor`](https://github.com/indix/web-auto-extractor) where I've merged some of the PRs from the original repo and added some of my own fixes. Published to npm as `@rane/web-auto-extractor`.
+
 # Web Auto Extractor
 [![Build Status](https://travis-ci.org/indix/web-auto-extractor.svg?branch=master)](https://travis-ci.org/indix/web-auto-extractor)
 
@@ -15,15 +17,15 @@ Popularly, many websites mark up their webpages with Schema.org vocabularies for
 **[Demo](https://tonicdev.com/npm/web-auto-extractor)** it on tonicdev
 
 ## Installation
-`npm install web-auto-extractor`
+`npm install @rane/web-auto-extractor`
 
 ## [Usage](#usage)
 
 ```js
 // IF CommonJS
-var WAE = require('web-auto-extractor').default
+var WAE = require('@rane/web-auto-extractor').default
 // IF ES6
-import WAE from 'web-auto-extractor'
+import WAE from '@rane/web-auto-extractor'
 
 var parsed = WAE().parse(sampleHTML)
 
