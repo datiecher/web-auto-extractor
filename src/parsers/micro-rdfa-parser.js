@@ -1,9 +1,9 @@
-import htmlparser from 'htmlparser2'
 import { AllHtmlEntities } from 'html-entities'
+import htmlparser from 'htmlparser2'
 
 const entities = new AllHtmlEntities()
 
-function getPropValue (tagName, attribs, TYPE, PROP) {
+function getPropValue(tagName, attribs, TYPE, PROP) {
   if (attribs[TYPE]) {
     return null
   } else if ((tagName === 'a' || tagName === 'link') && attribs.href) {
@@ -39,7 +39,7 @@ const getType = (typeString) => {
   }
 }
 
-const cleanWhitespace = text => text.replace(/\s+/g, ' ').trim()
+const cleanWhitespace = text => text.replace ? text.replace(/\s+/g, ' ').trim() : text;
 
 const createHandler = function (specName) {
   let scopes = []
