@@ -1,6 +1,6 @@
 {
-  "name": "@rane/web-auto-extractor",
-  "version": "2.0.7",
+  "name": "@datiecher/web-auto-extractor",
+  "version": "2.1.0",
   "description": "Automatically extracts structured information from webpages",
   "main": "dist/index.js",
   "scripts": {
@@ -48,10 +48,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/raine/web-auto-extractor.git"
+    "url": "https://github.com/datiecher/web-auto-extractor.git"
   },
   "bugs": {
-    "url": "https://github.com/raine/web-auto-extractor/issues"
+    "url": "https://github.com/datiecher/web-auto-extractor/issues"
   },
   "tonicExampleFilename": "tonicExample.js"
 }
