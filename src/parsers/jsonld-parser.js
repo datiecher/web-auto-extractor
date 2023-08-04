@@ -1,20 +1,19 @@
-import { getCheerioObject } from './utils'
-import { AllHtmlEntities } from 'html-entities'
+import { decode } from 'html-entities'
 import _ from 'lodash'
+
+import { getCheerioObject } from './utils'
 
 const mapValuesDeep = (obj, fn) =>
   _.isArray(obj)
     ? _.map(obj, (val) => mapValuesDeep(val, fn))
     : _.mapValues(obj, (val, key) =>
-        _.isPlainObject(val)
-          ? mapValuesDeep(val, fn)
-          : fn(val, key, obj))
-
-const entities = new AllHtmlEntities()
+      _.isPlainObject(val)
+        ? mapValuesDeep(val, fn)
+        : fn(val, key, obj))
 
 export default function (html, config = {}) {
   const $html = getCheerioObject(html)
-  let jsonldData = {}
+  const jsonldData = {}
 
   $html('script[type="application/ld+json"]').each((index, item) => {
     try {
@@ -30,7 +29,7 @@ export default function (html, config = {}) {
       let parsedJSON = JSON.parse(cleanedJson)
       parsedJSON = mapValuesDeep(
         parsedJSON,
-        (val) => _.isString(val) ? entities.decode(val) : val
+        (val) => _.isString(val) ? decode(val) : val
       )
       if (!Array.isArray(parsedJSON)) {
         parsedJSON = [parsedJSON]

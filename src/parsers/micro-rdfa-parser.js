@@ -1,15 +1,13 @@
-import { AllHtmlEntities } from 'html-entities'
-import htmlparser from 'htmlparser2'
+import { decode } from 'html-entities'
+import * as htmlparser from 'htmlparser2'
 
-const entities = new AllHtmlEntities()
-
-function getPropValue(tagName, attribs, TYPE, PROP) {
+function getPropValue (tagName, attribs, TYPE, PROP) {
   if (attribs[TYPE]) {
     return null
   } else if ((tagName === 'a' || tagName === 'link') && attribs.href) {
     return attribs.href.trim()
   } else if (attribs.content) {
-    return entities.decode(attribs.content.trim())
+    return decode(attribs.content.trim())
   } else if (attribs[PROP] === 'image' && attribs.src) {
     return attribs.src.trim()
   } else {
@@ -39,12 +37,12 @@ const getType = (typeString) => {
   }
 }
 
-const cleanWhitespace = text => text.replace ? text.replace(/\s+/g, ' ').trim() : text;
+const cleanWhitespace = text => text.replace ? text.replace(/\s+/g, ' ').trim() : text
 
 const createHandler = function (specName) {
-  let scopes = []
-  let tags = []
-  let topLevelScope = {}
+  const scopes = []
+  const tags = []
+  const topLevelScope = {}
   let textForProp = null
   const { TYPE, PROP } = getAttrNames(specName)
 
@@ -54,7 +52,7 @@ const createHandler = function (specName) {
 
     if (attribs[TYPE]) {
       if (attribs[PROP] && currentScope) {
-        let newScope = {}
+        const newScope = {}
         currentScope[attribs[PROP]] = currentScope[attribs[PROP]] || []
         if (!Array.isArray(currentScope[attribs[PROP]])) {
           currentScope[attribs[PROP]] = [currentScope[attribs[PROP]]]
@@ -83,7 +81,7 @@ const createHandler = function (specName) {
           currentScope[attribs[PROP]] = [currentScope[attribs[PROP]]]
         }
 
-        var value = getPropValue(tagName, attribs, TYPE, PROP)
+        const value = getPropValue(tagName, attribs, TYPE, PROP)
         if (!value) {
           tag = PROP
           if (Array.isArray(currentScope[attribs[PROP]])) {
@@ -105,7 +103,7 @@ const createHandler = function (specName) {
   }
   const ontext = function (text) {
     if (textForProp) {
-      const decodedText = entities.decode(text)
+      const decodedText = decode(text)
       if (Array.isArray(scopes[scopes.length - 1][textForProp])) {
         scopes[scopes.length - 1][textForProp][scopes[scopes.length - 1][textForProp].length - 1] += ' ' + decodedText
       } else {
@@ -116,7 +114,7 @@ const createHandler = function (specName) {
   const onclosetag = function (tagname) {
     const tag = tags.pop()
     if (tag === TYPE) {
-      let scope = scopes.pop()
+      const scope = scopes.pop()
       if (!scope['@context']) {
         delete scope['@context']
       }
